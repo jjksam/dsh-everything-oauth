@@ -35,7 +35,6 @@
   },
   "scripts": {
     "build": "tsdown && node scripts/wrap-client.mjs",
-    "prepare": "node scripts/prepare.mjs",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.client.json",
     "check": "npm run typecheck && npm run test && npm run build"
