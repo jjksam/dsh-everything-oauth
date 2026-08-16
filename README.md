@@ -1,5 +1,23 @@
 # dsh-everything-oauth
 
+> **Fork note (jjksam)** — this fork differs from `kam74515-boop/dsh-everything-oauth`:
+>
+> - **Dropped the `prepare` build script.** The `npx tsdown` build-on-install failed on Windows and also tripped pnpm's `allowBuilds` gate for git-hosted installs. `lib/` is committed, so installs use the prebuilt output directly.
+> - **Unscoped the package name back to `dsh-everything-oauth`.** The prebuilt `lib/client.js` registers its module id under that name; a scoped name broke client-plugin discovery (the Settings page never appeared).
+> - `scripts/prepare.mjs` now uses `npx.cmd` on Windows, kept for anyone who re-enables the prepare step.
+>
+> **Install from this fork:**
+> ```sh
+> dsh plugin --profile web add github:jjksam/dsh-everything-oauth
+> # or --profile desktop for the DSH Desktop app
+> ```
+> The **Settings → Everything OAuth** page may not appear (client-plugin discovery issue); use the CLI instead:
+> ```sh
+> dsh plugin --profile web exec dsh-everything-oauth status
+> dsh plugin --profile web exec dsh-everything-oauth import <source-id...>
+> ```
+> `status` lists discovered sources and their ids (e.g. `ccswitch:claude:<uuid>`); pass those ids to `import`.
+
 Import local coding-platform logins into [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) without signing in again.
 
 Scans the same places [CC Switch](https://github.com/farion1231/cc-switch) cares about:
